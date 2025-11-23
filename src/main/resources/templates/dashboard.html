@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Biblioteca – Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-100">
+
+<!-- Barra superior -->
+<header class="bg-indigo-700 text-white shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <h1 class="text-xl md:text-2xl font-bold">
+            Panel de Administración – Biblioteca
+        </h1>
+        <span class="text-sm opacity-80">
+            Rol: Administrador
+        </span>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Pestañas -->
+    <div class="border-b border-gray-200 mb-6">
+        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+            <button
+                    class="tab-link border-indigo-600 text-indigo-600 whitespace-nowrap py-3 px-3 border-b-2 text-sm font-medium"
+                    data-target="#tab-usuarios">
+                Usuarios
+            </button>
+            <button
+                    class="tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-3 border-b-2 text-sm font-medium"
+                    data-target="#tab-libros">
+                Libros
+            </button>
+            <button
+                    class="tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-3 px-3 border-b-2 text-sm font-medium"
+                    data-target="#tab-prestamos">
+                Préstamos
+            </button>
+        </nav>
+    </div>
+
+    <!-- Contenido de pestañas -->
+    <section id="tab-usuarios" class="tab-content">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Gestión de usuarios</h2>
+        <p class="text-sm text-gray-600 mb-6">
+            Administra los usuarios registrados en la biblioteca: estudiantes, docentes, etc.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Vista de usuarios -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Vista de usuarios</h3>
+                <p class="text-sm text-gray-600 mb-4">
+                    Consulta el listado completo de usuarios registrados, estados y detalles.
+                </p>
+                <a th:href="@{/usuarios}"
+                   class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">
+                    Ver usuarios
+                </a>
+            </div>
+
+            <!-- Registrar usuario -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Registrar usuario</h3>
+                <p class="text-sm text-gray-600 mb-4">
+                    Agrega nuevos usuarios a la biblioteca (nombre, documento, contacto, etc.).
+                </p>
+                <a th:href="@{/registrousuario}"
+                   class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700">
+                    Registrar usuario
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tab-libros" class="tab-content hidden">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Gestión de libros</h2>
+        <p class="text-sm text-gray-600 mb-6">
+            Administra el catálogo de libros disponibles en la biblioteca.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Vista de libros -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Vista de libros</h3>
+                <p class="text-sm text-gray-600 mb-4">
+                    Consulta todos los libros registrados: título, autor, año, estado, etc.
+                </p>
+                <a th:href="@{/libros}"
+                   class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">
+                    Ver libros
+                </a>
+            </div>
+
+            <!-- Registrar libro -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Registrar libro</h3>
+                <p class="text-sm text-gray-600 mb-4">
+                    Agrega nuevos libros al catálogo de la biblioteca.
+                </p>
+                <a th:href="@{/registrolibro}"
+                   class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700">
+                    Registrar libro
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tab-prestamos" class="tab-content hidden">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Gestión de préstamos</h2>
+        <p class="text-sm text-gray-600 mb-6">
+            Controla los préstamos de libros, fechas de entrega y devoluciones.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Vista de préstamos -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Vista de préstamos</h3>
+                <p class="text-sm text-gray-600 mb-4">
+                    Consulta los préstamos activos e históricos, usuarios y libros asociados.
+                </p>
+                <a th:href="@{/prestamos}"
+                   class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">
+                    Ver préstamos
+                </a>
+            </div>
+
+            <!-- Registrar préstamo -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Registrar préstamo</h3>
+                <p class="text-sm text-gray-600 mb-4">
+                    Registra un nuevo préstamo seleccionando usuario, libro y fechas.
+                </p>
+                <a th:href="@{/registroprestamo}"
+                   class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700">
+                    Registrar préstamo
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Script sencillo para manejar pestañas -->
+<script>
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabLinks.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-target');
+
+            // quitar activo de todos
+            tabLinks.forEach(b => {
+                b.classList.remove('border-indigo-600', 'text-indigo-600');
+                b.classList.add('border-transparent', 'text-gray-500');
+            });
+            tabContents.forEach(c => c.classList.add('hidden'));
+
+            // activar seleccionado
+            btn.classList.add('border-indigo-600', 'text-indigo-600');
+            btn.classList.remove('border-transparent', 'text-gray-500');
+
+            document.querySelector(target).classList.remove('hidden');
+        });
+    });
+</script>
+
+</body>
+</html>
