@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Préstamo – Biblioteca</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .form-input {
+            border: 1px solid #d1d5db;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="bg-white p-8 md:p-10 rounded-xl shadow-2xl w-full max-w-2xl border-t-4 border-indigo-600">
+
+    <h1 class="text-3xl font-extrabold text-gray-800 mb-8 text-center">
+        Registro de Préstamo
+    </h1>
+
+    <form th:action="@{/registroprestamo}" th:object="${prestamoDto}" method="post"
+          class="space-y-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="md:col-span-2">
+            <label for="id" class="block text-sm font-medium text-gray-700 mb-1">ID (opcional)</label>
+            <input type="number" id="id" th:field="*{id}" placeholder="ID interno del préstamo" class="form-input">
+        </div>
+
+        <div class="md:col-span-2">
+            <label for="usuarioId" class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
+            <select id="usuarioId" th:field="*{usuarioId}" class="form-input" required>
+                <option value="" disabled selected>Seleccione un usuario</option>
+                <option th:each="u : ${usuarios}"
+                        th:value="${u.id}"
+                        th:text="${u.nombre + ' - ' + u.correo}">
+                    Usuario ejemplo
+                </option>
+            </select>
+        </div>
+
+        <div class="md:col-span-2">
+            <label for="libroId" class="block text-sm font-medium text-gray-700 mb-1">Libro</label>
+            <select id="libroId" th:field="*{libroId}" class="form-input" required>
+                <option value="" disabled selected>Seleccione un libro</option>
+                <option th:each="l : ${libros}"
+                        th:value="${l.id}"
+                        th:text="${l.titulo + ' - ' + l.autor}">
+                    Libro ejemplo
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label for="fechaPrestamo" class="block text-sm font-medium text-gray-700 mb-1">
+                Fecha de préstamo
+            </label>
+            <input type="date" id="fechaPrestamo" th:field="*{fechaPrestamo}"
+                   required class="form-input">
+        </div>
+
+        <div>
+            <label for="fechaDevolucion" class="block text-sm font-medium text-gray-700 mb-1">
+                Fecha de devolución
+            </label>
+            <input type="date" id="fechaDevolucion" th:field="*{fechaDevolucion}"
+                   required class="form-input">
+        </div>
+
+        <div class="md:col-span-2">
+            <label for="estado" class="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+            <select id="estado" th:field="*{estado}" class="form-input" required>
+                <option value="" disabled selected>Seleccione el estado</option>
+                <option value="Activo">Activo</option>
+                <option value="Devuelto">Devuelto</option>
+                <option value="Vencido">Vencido</option>
+            </select>
+        </div>
+
+        <div class="md:col-span-2 pt-4">
+            <button
+                    type="submit"
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-150 ease-in-out"
+            >
+                Registrar Préstamo
+            </button>
+        </div>
+    </form>
+
+    <div class="md:col-span-2 pt-6 flex flex-col md:flex-row gap-3 justify-between">
+        <a th:href="@{/prestamos}"
+           class="inline-flex justify-center px-4 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300 transition">
+            ← Ver Préstamos
+        </a>
+
+        <a th:href="@{/dashboard}"
+           class="inline-flex justify-center px-4 py-2 rounded-lg bg-gray-100 text-gray-700 text-sm font-medium hover:bg-gray-200 transition">
+            ← Volver al Dashboard
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
